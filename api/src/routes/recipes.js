@@ -3,13 +3,13 @@ const { Router } = require('express');
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const { getAllRecipes } = require('../controllers')
-const {  Recipe, Diet} = require('../db.js')
+const { getAllRecipes, getDbById, getById } = require('../controllers')
+const { API_KEY  } = process.env;
 
 const router = Router();
 
 
-router.get('/', async (req, res, next)=>{
+router.get('/', async (req, res, next) => {
 try {
     const name = req.query.name
     let allRecipes= await getAllRecipes()
@@ -23,47 +23,33 @@ try {
     }
 
 } catch (error) {
-    next(error)
+    res.status(400).send({error: "Recipe not found" })
 }
       
 })
 
-router.get('/:id', async (req, res, next)=>{
-    try {
-        const {id} =req.params
-        const allFood = await getAllRecipes()
-        if(id){
-            let recipeId = await allFood.filter( (v)=> v.id == id)
-            recipeId.length ?
-            res.status(200).json(recipeId):
-            res.status(404).send('No se encontro la receta')
+
+
+router.get("/:id",async(req,res) => {
     
-        }
-    } catch (error) {
-        next(error)
-    }
-   
+  try {
+    const { id } = req.params
+    const regex = /([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/;
+    if (regex.test(id)) {
+      const fromDB = await getDbById(id)
+      return res.json(fromDB)
+      
+    } else  {
+      const fromAPI = await getById(id)
+      console.log(fromAPI)
+      return res.json(fromAPI)
+    } 
+  }
+  catch (error) {
+    res.status(400).send({error: "Id not found" })
+  }
+
 })
-
-
-// router.post('/', async (req, res, next)=>{
-//         const { id, name,summary, healthScore, steps, diet, createdInDb} = req.body
-//     try {
-        
-//         if(!name || !summary) res.status(400).json({msg : 'Faltan datos'});
-
-//         const recipeCreate = await Recipe.create({
-//              id, name, summary, healthScore , steps, createdInDb });
-//         const dietDb = await Diet.findAll({
-//             where:{name: diet}
-//         })
-//         recipeCreate.addDiet(dietDb)
-//         res.status(201).send('Creado con éxito')
-//       } catch (error) {
-//         next(error)
-//       }
-// })
-
 
 
 

@@ -27,8 +27,7 @@ module.exports = (sequelize) => {
       defaultValue : 0
     },
     steps:{
-      type: DataTypes.ARRAY(DataTypes.JSON),
-     
+      type: DataTypes.ARRAY(DataTypes.JSON)
     },
     image:{
       type:DataTypes.STRING,

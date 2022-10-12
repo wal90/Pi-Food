@@ -10,12 +10,12 @@ const { API_KEY  } = process.env;
 
 const router = Router();
 
-router.get('/', async (req, res, next)=>{
+router.get('/', async (req, res )=>{
     try {
       const getDiets = await getAllDiets() 
       res.json(getDiets)
     } catch (error) {
-        next(error)
+      res.status(400).send({error: "Diet not found" })
     }
 })
 

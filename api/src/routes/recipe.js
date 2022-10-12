@@ -9,7 +9,7 @@ const { API_KEY  } = process.env;
 
 const router = Router();
 
-router.post('/', async (req, res, next)=>{
+router.post('/', async (req, res )=>{
    
     try {
         const { name,summary, healthScore, steps, diet, createdInDb} = req.body
@@ -23,7 +23,7 @@ router.post('/', async (req, res, next)=>{
         recipeCreate.addDiet(dietDb)
         res.status(201).send('Creado con éxito')
       } catch (error) {
-        next(error)
+        res.status(400).send({error: "error" })
       }
 })
 
