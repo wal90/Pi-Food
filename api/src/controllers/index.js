@@ -18,9 +18,9 @@ const router = Router();
     try {
 
     
-    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
+   const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
 
-    // const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`);
+   //const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`);
 
     // console.log(apiUrl.data.results)
     const apiToDb = await apiUrl.data.results.map( r =>{
@@ -96,6 +96,7 @@ const getAllRecipes = async () =>{
 const getById = async (id) =>{
 
     try {
+        //const idApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`);
         const idApi = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
     const d = idApi.data
     return{
@@ -146,7 +147,7 @@ const getAllDiets = async () =>{
        const dietsApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
 
 
-   //  const dietsApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`);
+   //const dietsApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`);
 
 
  //const dietsApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`)

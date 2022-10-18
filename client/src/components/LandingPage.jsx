@@ -7,7 +7,10 @@ export default function LandingPage(){
         <div>
             <p><strong>BIENVENIDOS A MI PÁGINA DE</strong></p>
             <h1>FOOD</h1>
+            <Link to='/home'>
             <button>INGRESAR</button>
+            </Link>
+            
         </div>
     )
 }
