@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getNameRecipes } from "../actions";
+import s from "../styles/searchBar.module.css"
 
 
 
@@ -24,7 +25,7 @@ export default function SearchBar(){
 
     return (
         <div>
-            <div>
+            <div className={s.in}>
                 <input
                  type="text" 
                  placeholder="search recipe"

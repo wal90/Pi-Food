@@ -97,7 +97,14 @@ function rootReducer(state = initialState, action){
                ...state,
                detail:action.payload
             }
-        
+
+        case 'FILTER_CREATED':
+            const allRecipesc = state.allRecipes
+            const createdFilter = action.payload === "Created" ? allRecipesc.filter(el=> el.createdInDb) : allRecipesc.filter(el=>!el.createInDb)
+            return{
+                ...state,
+                recipes: action.payload === "All" ? state.allRecipes : createdFilter
+            }
     
         default:
             return state

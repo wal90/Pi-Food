@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail } from "../actions";
 import { useEffect } from "react";
+import s from '../styles/detail.module.css'
 
 
 
@@ -16,29 +17,60 @@ export default function Detail(props){
     const myRecipe = useSelector((state) => state.detail)
     console.log(myRecipe)
     return (
-        <div>
+        <div className={s.container}>
 
+       
+        <div className={s.padre}> 
 
             {
                 !myRecipe ? <p>Loading...</p> :
-                <div>
+                <div className={s.containD}>
                 <div key={myRecipe.id} >
-                    <img src={myRecipe.image} width="300px" hight="300px"/> 
-                    <h1>{myRecipe.name}</h1>
-                    <h5>Type: {myRecipe.type}</h5>
-                    <h5>Health Score: {myRecipe.healthScore}</h5>
-                    <h5>Diet: {myRecipe.diet}</h5> 
-                    <p>Summary: {myRecipe.summary}</p>
-                     <p>Steps: {myRecipe.steps}</p> 
+                    <div className={s.containImage}>
+                      <img src={myRecipe.image}/>   
+                    </div>
+
+                    <div className={s.details}>
+                        <h1>{myRecipe.name}</h1>
+
+                    <div className={s.containText}>
+                         <div className={s.detailsOne}>
+                            <p>TYPE</p>
+                            <h5>{myRecipe.type}</h5>
+                            <p>HEALTH SCORE</p>
+                            <h5>{myRecipe.healthScore}</h5>
+                            <p>DIET</p>
+                            <h5>{myRecipe.diet}</h5> 
+                            <p>SUMMARY</p> 
+                            <h5>{myRecipe.summary}</h5>
+                        </div>
+                        <div className={s.detailsTwo}>
+                            <p>STEPS</p>
+                            <h5>{myRecipe.steps}</h5>  
+                        </div>
+                    </div>
+
+                       
+                        
+                       
+                     
+                    </div>
+                    
+                    
 
 
                 </div> 
                 </div>  
             } 
-            <Link to="/home">
-               <button>Back</button> 
-            </Link>
-              
+
+            <div className={s.btn}>
+                <Link to="/home" className={s.link}>
+                    <button>Back</button> 
+                </Link>
+
+           </div>
+            
+        </div>
         </div>
     )
 }

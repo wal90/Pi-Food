@@ -75,3 +75,10 @@ export function getDetail(id){
         }
     }
 }
+
+export function filterCreated(payload){
+    return{
+        type: 'FILTER_CREATED',
+        payload
+    }
+}

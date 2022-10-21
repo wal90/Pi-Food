@@ -1,0 +1,100 @@
+.containerHome{
+   background-image: url('../image/home.png'); 
+    object-fit: cover;
+    background-attachment: fixed;
+}
+
+.allCards{
+    display: flex;
+    gap: 30px;
+    margin: 30px 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-decoration:none
+}
+
+.nav{
+
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+padding: 0px 50px;
+
+
+justify-content: space-between;
+
+}
+
+.nav h1{
+    font-family: 'DM Serif Display';
+    font-size: 50px;
+    letter-spacing: 1px;
+    color: #ff2028; 
+}
+
+.nav button {
+
+    padding: 1.3em 2em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    /* font-weight: 500; */
+    color: #015d3a;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+  
+ .nav button:hover {
+    background-color: #015d3a;
+    box-shadow: 0px 3px 7px rgba(46, 229, 156, 0.163);
+    color: #fff;
+    transform: translateY(-3px);
+  }
+  
+ .nav button:active {
+    transform: translateY(-1px);
+  }
+
+.link{
+  font-size: 15px;
+  color: #3f3f3f;
+  line-height:0px;
+  text-decoration: none;
+  margin-left: 30px;
+
+}
+.pag{
+  
+    justify-content: center;
+}
+
+.sel{
+   position: relative;
+  display:inline-block;
+}
+ 
+
+select{
+display: inline-block;
+border-radius: 45px;
+box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+cursor: pointer;
+padding: 10px 15px;
+outline: 0;
+border :0;
+border-radius: 45px;
+ background: #fff;
+color:  #015d3a;
+appearance:none;
+  
+    
+
+  }
+   
+  
+    
