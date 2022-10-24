@@ -57,6 +57,7 @@ export default function Home(){
     function handleFilterCreate(e){
         e.preventDefault();
         dispatch(filterCreated(e.target.value))
+       
     }
 
 
@@ -102,7 +103,7 @@ export default function Home(){
                     <option value="All">All</option>
                     <option value="Actual">Actual</option>
                     <option value="Created">Created</option>
-                </select>
+            </select>
 
             <select onChange={e => handleSortHs(e)}>
                 <option value="des">Descending order</option>
@@ -125,7 +126,7 @@ export default function Home(){
             {
                  currentRecipes?.map((c)=> {
                     return(
-                        <Fragment key={c.id}>
+                        <Fragment>
                             <Link to={"/recipes/" + c.id}>
                             <Card image={c.image} name={c.name} diet={c.diet} healthScore={c.healthScore} key={c.id} />
                             </Link>

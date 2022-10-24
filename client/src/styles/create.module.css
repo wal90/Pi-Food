@@ -46,8 +46,8 @@
     height: 420px;
     background: #ffffff;
     overflow: visible;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
-    margin-top: 5px;
+    /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24); */
+    margin-top: 0px;
     padding: 35px;
 }
 
@@ -86,7 +86,7 @@ margin-top: -15px;
     cursor: pointer;
     outline: none;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
  .link button:hover {
@@ -109,18 +109,16 @@ text-transform: uppercase;
   font-family:'Quicksand';
   line-height: 0;
   
- 
 }
 .sInput input		{
-  
-  border-bottom: solid 1px orange;
-  border-radius: 0px;
- width: 100%;
- font-size: 12px;
-  margin-bottom: 5px;
-  outline: none;
-  background: transparent;
-  padding: 0;
+border-bottom: solid 1px orange;
+border-radius: 0px;
+width: 100%;
+font-size: 12px;
+margin-bottom: 5px;
+outline: none;
+background: transparent;
+padding: 0;
 
   
   
@@ -129,6 +127,41 @@ text-transform: uppercase;
 input:hover, input:focus {
   box-shadow: 0 0 0em orange;
 }
+
+
+input[type="range"]{
+  width: 100%;
+  height: 0.5px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: rgb(255, 198, 93);
+  line-height: 0;
+
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  width: 10px;
+  background-color: orange;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.data {
+  font-family: 'DM Serif Display';
+
+  margin-top:0px;
+  color: orange;
+  padding-left: 3px;
+  border:hidden;
+  font-size: 18px;
+
+
+  
+}
+
 
 .error{
   font-family:'Quicksand';
@@ -226,30 +259,24 @@ appearance:none; */
 
 
 display: inline-block;
-	cursor: pointer;
-  	padding: 10px 10px;
-  	height: 40px;
-  	outline: 0; 
-  	border: 0;
-    margin-left: 10px;
+cursor: pointer;
+padding: 10px 10px;
+height: 40px;
+outline: 0; 
+border: 0;
+margin-left: 10px;
 text-align: center;
-	border-radius: 45px;
-  background: transparent;
-	color: #ffffff;
-	font-size: 12px;
-	color: #015d3a;
-  text-transform: uppercase;
-  font-weight: 500;
-  
-
-
-	font-family: 
-	'Quicksand', sans-serif;
-
+border-radius: 45px;
+background: transparent;
+color: #ffffff;
+font-size: 12px;
+color: #015d3a;
+ text-transform: uppercase;
+font-weight: 500;
+font-family: 
+'Quicksand', sans-serif;
 box-shadow: 0;
-   
- 
-    transition: all 0.25s ease;
+transition: all 0.25s ease;
 
 
 }

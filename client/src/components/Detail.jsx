@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail } from "../actions";
 import { useEffect } from "react";
+import Loading from "./Loading"
 import s from '../styles/detail.module.css'
 
 
@@ -23,7 +24,7 @@ export default function Detail(props){
         <div className={s.padre}> 
 
             {
-                !myRecipe ? <p>Loading...</p> :
+                !myRecipe ? <Loading/>  :
                 <div className={s.containD}>
                 <div key={myRecipe.id} >
                     <div className={s.containImage}>
@@ -40,7 +41,7 @@ export default function Detail(props){
                             <p>HEALTH SCORE</p>
                             <h5>{myRecipe.healthScore}</h5>
                             <p>DIET</p>
-                            <h5>{myRecipe.diet}</h5> 
+                            <h5>{myRecipe.diets ? myRecipe.diets.map(e=>e.name).join(" · ") : myRecipe.diet }</h5> 
                             <p>SUMMARY</p> 
                             <h5>{myRecipe.summary}</h5>
                         </div>

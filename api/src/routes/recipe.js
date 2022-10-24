@@ -9,21 +9,24 @@ const { API_KEY  } = process.env;
 
 const router = Router();
 
-router.post('/', async (req, res )=>{
-   
+router.post('/', async (req, res , netx)=>{
+    const {  name,summary, type,  healthScore, steps, diet, createdInDb} = req.body
+    if(!name || !summary) res.status(400).json({msg : 'Faltan datos'});
     try {
-        const { name,summary, healthScore, steps, diet, createdInDb} = req.body
-        if(!name || !summary) res.status(400).json({msg : 'Faltan datos'});
-
         const recipeCreate = await Recipe.create({
-             name, summary, healthScore , steps, createdInDb });
+             name, summary, type, healthScore , steps, createdInDb });
+
+       
         const dietDb = await Diet.findAll({
             where:{name: diet}
         })
+
+        console.log(Diet.__proto__)
         recipeCreate.addDiet(dietDb)
-        res.status(201).send('Creado con éxito')
+        res.status(201).json('Creado con éxito')
       } catch (error) {
-        res.status(400).send({error: "error" })
+        // res.status(400).send({error: "error" })
+        netx(error)
       }
 })
 

@@ -9,18 +9,19 @@ function validate(input) {
     let errors = {};
     if (!input.name) {
       errors.name = 'Name is required';
-    }  else if (!/^[A-Za-z]+$/i.test(input.name)) {
-        errors.name = 'Name is invalid';
-      }
+    } 
+    if (!input.type){
+        errors.type = 'Type is required'
+    }
     if (!input.summary) {
       errors.summary = 'Summary is required';
     } 
     if(!input.healthScore){
         errors.healthScore = 'Health Score is required';
-    } else if(!/^(?:(?:^|,)([0-9]|[1-9]\d|10[00])(?!.*,\1(?:,|$)))+$/.test(input.healthScore)){
-        errors.healthScore = 'Health Score is invalid';
-    }
-    if(!/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(input.image) ){
+    } 
+    if(!input.image){
+        errors.image= 'Image is required'
+    } else if (!input.image.includes('https://')){
         errors.image= 'Image is invalid'
     }
     if(!input.steps){
@@ -36,12 +37,13 @@ function validate(input) {
 export default function RecipeCreate(){
     const dispatch = useDispatch()
     const history = useHistory()
-    const diets = useSelector((state)=> state.diet)
+    const diet = useSelector((state)=> state.diet)
     const [errors, setErrors] = useState({})
     
 
     const [input, setInput] = useState({
         name:"",
+        type:"",
         summary:"",
         healthScore:0,
         image:"",
@@ -71,15 +73,17 @@ export default function RecipeCreate(){
         e.preventDefault();
         dispatch(postRecipe(input))
         alert("Recipe created")
+        console.log(input)
         setInput({
             name:"",
+            type:"",
             summary:"",
             healthScore:0,
             image:"",
             steps:[],
             diet:[]
         })
-        history.push("/home")
+
 
     }
 
@@ -128,6 +132,18 @@ export default function RecipeCreate(){
                 </div>
 
                 <div className={s.sInput}>
+                    <label>Type: </label>
+                    <input
+                    type="text"
+                    value={input.type} 
+                    name="type"
+                    onChange={(e)=>handleChange(e)}/>
+                    {errors.type &&(
+                        <p className={s.error}>{errors.type}</p>
+                    )}
+                </div>    
+
+                <div className={s.sInput}>
                     <label>Sumary: </label>
                     <input
                     type="text"
@@ -143,13 +159,15 @@ export default function RecipeCreate(){
                 <div className={s.sInput}>
                     <label>Health Score: </label>
                     <input
-                    type="text"
+                    type="range"
+                    min="0" 
+                    max="100" 
                     value={input.healthScore}
                     name="healthScore"
                     onChange={(e)=>handleChange(e)} />
-                     {errors.healthScore &&(
-                        <p className={s.error}>{errors.healthScore}</p>
-                    )}
+                     {errors.healthScore ?(
+                        <p className={s.error}>{errors.healthScore}</p> 
+                      ) :  <p className={s.data}>{input.healthScore}</p>}
                 </div>
 
                  
@@ -181,7 +199,8 @@ export default function RecipeCreate(){
                 <div className={s.sInput}>
                     <label>Select Diet </label>
                     <select onChange ={(e)=>handleSelect(e)}>
-                        {diets.map((d) => (
+                     
+                        {diet.map((d) => (
                          <option key={d.name} value={d.name}>{d.name}</option>
                          ))} 
                      </select>

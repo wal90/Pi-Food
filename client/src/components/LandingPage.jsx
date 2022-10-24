@@ -13,10 +13,10 @@ export default function LandingPage(){
 
             <div className={s.contain}>
             <div className={s.text}>
-                   <p><strong>BIENVENIDOS A MI PÁGINA DE</strong></p>
+                   <p><strong>WELCOME TO</strong></p>
                 <h1>FOOD</h1>
                  <Link to='/home'>
-                    <button >Ingresar</button>
+                    <button >Let's cook!</button>
                 </Link>   
                 </div>         
         </div> 

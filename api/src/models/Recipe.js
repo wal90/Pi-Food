@@ -18,6 +18,9 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    type:{
+      type:DataTypes.STRING
+    },
     healthScore:{
       type : DataTypes.FLOAT,
       validate : {
@@ -30,8 +33,8 @@ module.exports = (sequelize) => {
       type:DataTypes.TEXT
     },
     image:{
-      type:DataTypes.STRING,
-      defaultValue:("https://heartstrokeprod.azureedge.net/-/media/images/articles/foodguideplatev2.ashx?rev=372b23652cd243f98bef2cca920a6fd4&bc=f7f7f7&w=1160&h=653&as=1&la=en&hash=32388F46CEA12E28FA9E7F05FE09110A")
+      type:DataTypes.STRING
+  
     },
     createdInDb: {
       type: DataTypes.BOOLEAN,

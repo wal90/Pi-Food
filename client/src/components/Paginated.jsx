@@ -16,6 +16,7 @@ export default function Paginated({recipePerPage, allRecipes, paginated}){
                   pageNumbers.map(number =>(
                     <li className={s.pa} key={number.toString()}>
                     <a onClick={()=> paginated(number)}>{number}</a>
+                    <div className={s.dot}></div>
                     </li>
                   ))
 

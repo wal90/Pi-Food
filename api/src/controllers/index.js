@@ -48,17 +48,6 @@ const router = Router();
  }
 
 
-
-
-
-
-
-
-
-
-
-
-
 const getDbInfo = async () =>{  
     try {
       return await Recipe.findAll({
@@ -108,7 +97,7 @@ const getById = async (id) =>{
         healthScore: d.healthScore,
         steps: d.analyzedInstructions.map(a=> a.steps.map(s=>s.step).join(' - ')),
         image: d.image,
-        diet: d.diets
+        diet: d.diets.map(d=>d).join(' · ')
     } 
     } catch (error) {
         return ({error: "Id not found " })
@@ -136,8 +125,6 @@ const getDbById = async (id) => {
         return ({error: "Id not found " })
     }
 };
-
-
 
 
 
