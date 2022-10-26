@@ -240,24 +240,7 @@ input[type="range"]::-webkit-slider-thumb{
 
 
 .sInput select {
-  /* border-radius: 45px;
-  font-family:'Quicksand';
-  border-bottom: solid 1px orange;
-  outline: none;
-  background: transparent;
-  padding: 0; 
-display: inline-block;
-box-shadow: 0;
-cursor: pointer;
-padding: 10px 15px;
-outline: 0;
-
-
- background: #fff;
-color:  #015d3a;
-appearance:none; */
-
-
+ 
 display: inline-block;
 cursor: pointer;
 padding: 10px 10px;

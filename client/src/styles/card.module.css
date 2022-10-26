@@ -55,21 +55,20 @@
     height: 30px;
 }
 
-.di h4{
-    font-family:'Quicksand';
-    color: #343434;
-    font-size: 14px;
-  
-    margin-top: 20px;
-   
-   
+.di .diet  {
+ font-family:'Quicksand';
+ color: #343434;
+ font-size: 13px;
+display: inline;
+
 }
 
 .di p{
     font-size: 10px;
     color: #3f3f3f;
     line-height:0px;
-    margin-top: 10px;
+    margin-top: 14px;
+    padding-bottom: 4px;
     
 }
 
@@ -96,7 +95,7 @@
 
 .hs h4{
     font-family: 'DM Serif Display';
-    font-size: 25px;
+    font-size: 30px;
     line-height:0px;
     margin-top: 30px;
     color: #ffb501;

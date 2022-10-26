@@ -19,9 +19,7 @@ function validate(input) {
     if(!input.healthScore){
         errors.healthScore = 'Health Score is required';
     } 
-    if(!input.image){
-        errors.image= 'Image is required'
-    } else if (!input.image.includes('https://')){
+     if (!input.image.includes('https://')){
         errors.image= 'Image is invalid'
     }
     if(!input.steps){
@@ -37,7 +35,7 @@ function validate(input) {
 export default function RecipeCreate(){
     const dispatch = useDispatch()
     const history = useHistory()
-    const diet = useSelector((state)=> state.diet)
+    const diets = useSelector((state)=> state.diets)
     const [errors, setErrors] = useState({})
     
 
@@ -48,7 +46,7 @@ export default function RecipeCreate(){
         healthScore:0,
         image:"",
         steps:[],
-        diet:[]
+        diets:[]
     })
 
     function handleChange(e){
@@ -65,7 +63,7 @@ export default function RecipeCreate(){
     function handleSelect(e){
         setInput({
             ...input,
-            diet:[...input.diet, e.target.value]
+            diets:[...input.diets, e.target.value]
         })
     }
 
@@ -81,7 +79,7 @@ export default function RecipeCreate(){
             healthScore:0,
             image:"",
             steps:[],
-            diet:[]
+            diets:[]
         })
 
 
@@ -90,7 +88,7 @@ export default function RecipeCreate(){
     function handleDelete(el){
         setInput({
             ...input,
-            diet: input.diet.filter(d => d !== el)
+            diets: input.diets.filter(d => d !== el)
         })
     }
 
@@ -200,14 +198,14 @@ export default function RecipeCreate(){
                     <label>Select Diet </label>
                     <select onChange ={(e)=>handleSelect(e)}>
                      
-                        {diet.map((d) => (
+                        {diets.map((d) => (
                          <option key={d.name} value={d.name}>{d.name}</option>
                          ))} 
                      </select>
                      
-                     {input.diet.map(el =>
+                     {input.diets.map(el =>
                         <div className={s.diet}>
-                            <p>{el}</p> <button onClick={()=>handleDelete(el)}>x</button> 
+                            <p>{el}</p> <button type="button" onClick={()=>handleDelete(el)}>x</button> 
                         </div>  
                       )}
                 </div>

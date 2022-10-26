@@ -20,9 +20,8 @@ const router = Router();
     
    const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
 
-   //const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`);
 
-    // console.log(apiUrl.data.results)
+  
     const apiToDb = await apiUrl.data.results.map( r =>{
                 return{
                     
@@ -33,7 +32,9 @@ const router = Router();
                     healthScore: r.healthScore,
                     steps: r.analyzedInstructions.map(a=> a.steps.map(s=>s.step).join(' - ')),
                     image: r.image,
-                    diet: r.diets
+                    diets: r.diets.map(d=>{return {
+                        name:d
+                    }})
                 }}
             )
         
@@ -72,7 +73,7 @@ const getAllRecipes = async () =>{
     try {
         const apiInfo = await getApiInfo()
         const dbInfo = await getDbInfo()
-        const infoTotal = apiInfo.concat(dbInfo)
+        const infoTotal = dbInfo.concat(apiInfo)
         return infoTotal 
     } catch (error) {
         return ({error: "Recipe not found " })
@@ -85,7 +86,7 @@ const getAllRecipes = async () =>{
 const getById = async (id) =>{
 
     try {
-        //const idApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`);
+        
         const idApi = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
     const d = idApi.data
     return{
@@ -97,7 +98,7 @@ const getById = async (id) =>{
         healthScore: d.healthScore,
         steps: d.analyzedInstructions.map(a=> a.steps.map(s=>s.step).join(' - ')),
         image: d.image,
-        diet: d.diets.map(d=>d).join(' · ')
+        diets: d.diets.map(d=>d).join(' · ')
     } 
     } catch (error) {
         return ({error: "Id not found " })
@@ -133,29 +134,39 @@ const getAllDiets = async () =>{
     try {
        const dietsApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
 
-
-   //const dietsApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`);
-
-
- //const dietsApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=26f5694668424436baf7cfbd6ca4948e&addRecipeInformation=true&number=100`)
       
-    const dataDiets = dietsApi.data.results.map(e => e.diets).join().split(',').filter(d => d !== "")
+    const dataDiets = dietsApi.data.results.map(e => e.diets)
+    const dietsFilter = new Set([...dataDiets.flat(), "vegetarian"])
 
-    const allDiets = dataDiets.filter((element, index)=>{ 
-        return dataDiets.indexOf(element) === index;
-    })
+    // const allDiets = dataDiets.filter((element, index)=>{ 
+    //     return dataDiets.indexOf(element) === index;
+    // })
 
-    allDiets.push("vegetarian")  
+    // const diets = Diets.map(name => ({ name }));
+    // await Diet.bulkCreate(diets)
+
+    // return [...dietsFilter].map(d=> new Object({"name" : d}))
+
+
     
-    allDiets.forEach(e=> {
-            Diet.findOrCreate({
-                where:{
-                    name: e
-                }
-            })
+    // dietsFilter.forEach(e=> {
+    //         Diet.findOrCreate({
+    //             where:{
+    //                 name: e
+    //             }
+    //         })
             
-           });
-            return await Diet.findAll()
+    //        });
+    //         return await Diet.findAll()
+
+            dietsFilter.forEach((d) => {
+                Diet.findOrCreate({
+                  where: { name: d },
+                });
+              });
+              const allDiets = await Diet.findAll();
+              return allDiets
+            
   
     } catch (error) {
         return ({error: "Diet not found " })

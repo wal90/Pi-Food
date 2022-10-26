@@ -2,7 +2,7 @@ const initialState ={
     recipes: [],
     detail:[],
     allRecipes:[],
-    diet:[],
+    diets:[],
     
 }
 
@@ -22,7 +22,8 @@ function rootReducer(state = initialState, action){
             }
         case 'FILTER_BY_DIET':
             const allRecipes = state.allRecipes
-            const dietFiltered = action.payload === "All" ? allRecipes : allRecipes.filter(e => e.diet?.includes(action.payload))
+            const dietFiltered = action.payload === "All" ? allRecipes : allRecipes.filter(e=>e.diets.find(e=> e.name == action.payload))
+            console.log(allRecipes)
             if(dietFiltered.length === 0){
                 alert("The diet doesn't belong to any recipe")
             }
@@ -89,14 +90,14 @@ function rootReducer(state = initialState, action){
         case 'GET_DIETS':
             return{
                 ...state,
-                diet:action.payload
+                diets:action.payload
             }
     
-        case 'GET_DETAILS':
-            return{
-               ...state,
-               detail:action.payload
-            }
+            case 'GET_DETAILS':
+                return{
+                   ...state,
+                   detail:action.payload
+                }
 
         case 'FILTER_CREATED':
             const allRecipe = state.allRecipes

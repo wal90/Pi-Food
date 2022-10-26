@@ -17,7 +17,7 @@ try {
         let foodName= await  allRecipes.filter(v=> v.name.toLowerCase().includes(name.toLocaleLowerCase()))
         foodName.length ?
         res.status(200).json(foodName) :
-        res.status(404).send('Receta no encontrada');
+        res.status(404).send('Recipe not found');
     } else{
         res.status(200).send(allRecipes)
     }

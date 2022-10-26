@@ -17,18 +17,30 @@ export default function Detail(props){
 
     const myRecipe = useSelector((state) => state.detail)
     console.log(myRecipe)
+
+    // var diets = "";
+	// if (myRecipe.diets !== undefined){
+	// 	diets = myRecipe.diets.map((e) => {
+	// 	 	 return  e.name;
+	// 	})
+	// }else{
+	// 	diets = myRecipe.diets
+	// }
+
+
     return (
         <div className={s.container}>
 
-       
-        <div className={s.padre}> 
+
+        <div className={s.padre}>
 
             {
-                !myRecipe ? <Loading/>  :
+
+                myRecipe ? 
                 <div className={s.containD}>
                 <div key={myRecipe.id} >
                     <div className={s.containImage}>
-                      <img src={myRecipe.image}/>   
+                      <img src={ myRecipe.image || "https://heartstrokeprod.azureedge.net/-/media/images/articles/foodguideplatev2.ashx?rev=372b23652cd243f98bef2cca920a6fd4&bc=f7f7f7&w=1160&h=653&as=1&la=en&hash=32388F46CEA12E28FA9E7F05FE09110A"} alt="image loading..."/>
                     </div>
 
                     <div className={s.details}>
@@ -40,37 +52,35 @@ export default function Detail(props){
                             <h5>{myRecipe.type}</h5>
                             <p>HEALTH SCORE</p>
                             <h5>{myRecipe.healthScore}</h5>
+
                             <p>DIET</p>
-                            <h5>{myRecipe.diets ? myRecipe.diets.map(e=>e.name).join(" · ") : myRecipe.diet }</h5> 
-                            <p>SUMMARY</p> 
+                            {/* {myRecipe.diets && myRecipe.diets.map(el => <h5>{el.name}</h5>)} */}
+
+                            {/* <h5>{myRecipe.diets}</h5>  */}
+                        {!myRecipe.createdInDb?  <h5>{myRecipe.diets}</h5> : myRecipe.diets.map(d =><h5> {d.name} </h5>) }
+                            {/* {myRecipe.createInDb? myRecipe.diets.map(d =><h5> {d.name} </h5>) : <h5>{myRecipe.diets}</h5> } */}
+                            <p>SUMMARY</p>
                             <h5>{myRecipe.summary}</h5>
                         </div>
                         <div className={s.detailsTwo}>
                             <p>STEPS</p>
-                            <h5>{myRecipe.steps}</h5>  
+                            <h5>{myRecipe.steps}</h5>
                         </div>
                     </div>
 
-                       
-                        
-                       
-                     
                     </div>
-                    
-                    
-
-
-                </div> 
-                </div>  
-            } 
+                </div>
+                </div>
+                : <Loading></Loading> 
+            }
 
             <div className={s.btn}>
                 <Link to="/home" className={s.link}>
-                    <button>Back</button> 
+                    <button>Back</button>
                 </Link>
 
            </div>
-            
+
         </div>
         </div>
     )

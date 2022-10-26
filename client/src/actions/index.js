@@ -26,7 +26,7 @@ export function getNameRecipes(name){
 
 export function getDiets(){
     return async function (dispatch){
-        var info = await axios.get('http://localhost:3001/diets', {});
+        var info = await axios.get('http://localhost:3001/diets');
         return dispatch({
             type: 'GET_DIETS',
             payload: info.data
@@ -62,6 +62,14 @@ export function orderByHs(payload){
     }
 }
 
+// export function getDetail(id){
+//     return{
+//         type: 'GET_DETAILS',
+//         payload: id
+//     }
+// }
+
+
 export function getDetail(id){
     return async function (dispatch){
         try {
@@ -75,6 +83,7 @@ export function getDetail(id){
         }
     }
 }
+
 
 export function filterCreated(payload){
     return{

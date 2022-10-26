@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import { getRecipes, filterRecipeByDiet, orderByName, orderByHs, filterCreated } from "../actions";
 import Card from "./Card";
 import Paginated from "./Paginated";
+import Loading from "./Loading"
 import s from "../styles/home.module.css"
 
 
@@ -111,6 +112,8 @@ export default function Home(){
             </select>
             </div>
             </div>
+
+
             <div className={s.pag}>
             <Paginated
                 recipePerPage={recipePerPage}
@@ -123,21 +126,27 @@ export default function Home(){
         <div className={s.allCards}>
        
          
-            {
-                 currentRecipes?.map((c)=> {
+            {   
+
+             currentRecipes.length > 0 ?
+                 currentRecipes.map((c)=> {
                     return(
                         <Fragment>
                             <Link to={"/recipes/" + c.id}>
-                            <Card image={c.image} name={c.name} diet={c.diet} healthScore={c.healthScore} key={c.id} />
+                            <Card image={c.image} name={c.name} diets={c.diets} healthScore={c.healthScore} key={c.id} />
                             </Link>
                         </Fragment>
                     )
                     
                 })
+
+              
+               : <Loading></Loading>     
             }
         </div>
-
         
+
+
               
         </div>
         </div>
